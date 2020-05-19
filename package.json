@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "lint": "eslint ./src/*",
-    "test": "jest",
+    "test": "jest --testPathPattern=src/data-structures/linked-list/__test__/LinkedList.test.js --watch",
     "ci": "npm run lint && npm run test -- --coverage"
   },
   "repository": {
