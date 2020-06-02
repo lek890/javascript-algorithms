@@ -9,6 +9,25 @@ export default class LinkedList {
     this.tail = null;
     this.compare = new Comparator(comparatorFunction);
   }
+  //OMG :D :D
+  // fromArray(inputArray) {
+  //   if (inputArray) {
+  //     const nodeArray = inputArray.map((item) => new LinkedListNode(item));
+
+  //     nodeArray.map((item, index) => {
+  //       if (!this.head) {
+  //         this.head = item;
+  //         this.head.next = nodeArray[index + 1];
+  //       } else {
+  //         item.next = nodeArray[index + 1];
+  //       }
+  //     });
+  //   }
+  // }
+
+  fromArray(values) {
+    values.forEach((value) => this.append(value));
+  }
 
   toArray() {
     const nodes = [];
@@ -22,9 +41,9 @@ export default class LinkedList {
     return nodes;
   }
 
-  toString() {
+  toString(formatter) {
     return this.toArray()
-      .map((node) => node.toString())
+      .map((node) => node.toString(formatter))
       .toString();
   }
 
@@ -34,10 +53,12 @@ export default class LinkedList {
     if (!this.head) {
       this.head = newNode;
       this.tail = newNode;
+      return this;
     }
 
     this.tail.next = newNode;
     this.tail = newNode;
+    return this;
   }
 
   prepend(value) {
@@ -48,6 +69,7 @@ export default class LinkedList {
     if (!this.tail) {
       this.tail = newNode;
     }
+    return this;
   }
 
   // delete_scrap(value) {
@@ -198,4 +220,49 @@ export default class LinkedList {
 
     return deletedHead;
   }
+
+  // find(item) {
+  //   let itemToBeFound = null;
+
+  //   if (!this.head && !this.tail) {
+  //     return null;
+  //   }
+
+  //   let currentNode = this.head;
+  //   while (currentNode) {
+  //     if (this.compare.equal(currentNode.value, item.value)) {
+  //       itemToBeFound = currentNode;
+  //       currentNode = null;
+  //     } else {
+  //       currentNode = currentNode.next;
+  //     }
+  //   }
+
+  //   return itemToBeFound;
+  // }
+
+  find({ value = undefined, callback = undefined }) {
+    if (!this.head) {
+      return null;
+    }
+
+    let currentNode = this.head;
+    while (currentNode) {
+      if (callback && callback(currentNode.value)) {
+        return currentNode;
+      }
+
+      if (value && this.compare.equal(currentNode.value, value)) {
+        return currentNode;
+      }
+      currentNode = currentNode.next;
+    }
+
+    return null;
+  }
+
+  reverse() {}
 }
+// tail == head > head.next?
+// tail > currentnode.next.next
+// empty list = !this.head
