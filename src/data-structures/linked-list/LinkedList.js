@@ -261,7 +261,9 @@ export default class LinkedList {
     return null;
   }
 
-  reverse() {}
+  reverse() {
+    //todo
+  }
 }
 // tail == head > head.next?
 // tail > currentnode.next.next
