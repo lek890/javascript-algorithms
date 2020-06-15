@@ -261,8 +261,33 @@ export default class LinkedList {
     return null;
   }
 
+  // reverse() {
+  //   const reversed = this.toArray().reverse();
+  //   this.head = reversed[0];
+
+  //   reversed.map((item, index) => {
+  //     item.next = reversed[index + 1] ? reversed[index + 1] : null;
+  //   });
+
+  //   this.tail = reversed[reversed.length - 1];
+  // }
+
   reverse() {
-    //todo
+    let currentNode = this.head;
+    let prevNode = null;
+    let nextNode = null;
+
+    while (currentNode) {
+      nextNode = currentNode.next;
+
+      currentNode.next = prevNode;
+
+      prevNode = currentNode;
+      currentNode = nextNode;
+    }
+
+    this.tail = this.head;
+    this.head = prevNode;
   }
 }
 // tail == head > head.next?
