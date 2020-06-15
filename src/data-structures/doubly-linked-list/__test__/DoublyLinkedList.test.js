@@ -20,7 +20,7 @@ describe("DoublyLinkedList", () => {
     expect(linkedList.toString()).toBe("1,2");
   });
 
-  it.only("should prepend node to linked list", () => {
+  it("should prepend node to linked list", () => {
     const linkedList = new DoublyLinkedList();
 
     linkedList.prepend(2);
@@ -43,9 +43,8 @@ describe("DoublyLinkedList", () => {
     expect(linkedList.toString()).toBe("1,1,2,3,3,3,4,5");
   });
 
-  it("should delete node by value from linked list", () => {
+  it.only("should delete node by value from linked list", () => {
     const linkedList = new DoublyLinkedList();
-
     expect(linkedList.delete(5)).toBeNull();
 
     linkedList.append(1);
@@ -60,6 +59,7 @@ describe("DoublyLinkedList", () => {
     expect(linkedList.head.toString()).toBe("1");
     expect(linkedList.tail.toString()).toBe("5");
 
+    console.log("helo", linkedList.toString());
     const deletedNode = linkedList.delete(3);
     expect(deletedNode.value).toBe(3);
     expect(linkedList.tail.previous.previous.value).toBe(2);

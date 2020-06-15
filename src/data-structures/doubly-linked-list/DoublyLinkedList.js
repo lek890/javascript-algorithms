@@ -69,4 +69,52 @@ export default class DoublyLinkedList {
 
     return this;
   }
+
+  fromArray(inputArray) {
+    // let currentNode = null;
+    // inputArray.forEach((item) => {
+    //   const nextNode = new DoublyLinkedListNode(item, null, currentNode);
+    //   if (!this.head) {
+    //     this.head = nextNode;
+    //   }
+    //   if (currentNode) {
+    //     currentNode.next = nextNode;
+    //   }
+    //   currentNode = nextNode;
+    // });
+
+    // improvised;
+    inputArray.forEach((value) => this.append(value));
+    return this;
+  }
+
+  delete(value) {
+    let deletedNode = null;
+
+    if (!this.head) {
+      return deletedNode;
+    }
+
+    let currentNode = this.head;
+
+    if (currentNode == value) {
+      this.head = currentNode.next;
+      currentNode = this.head;
+    }
+
+    while (currentNode) {
+      if (value == currentNode.toString()) {
+        const nextNode = currentNode.next;
+        const previousNode = currentNode.previous;
+
+        deletedNode = currentNode;
+        if (nextNode) nextNode.previous = previousNode;
+
+        if (previousNode) previousNode.next = nextNode;
+      }
+      currentNode = currentNode.next;
+    }
+
+    return deletedNode;
+  }
 }
