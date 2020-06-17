@@ -89,6 +89,50 @@ export default class DoublyLinkedList {
   }
 
   delete(value) {
+    // let deletedNode = null;
+
+    // if (!this.head) {
+    //   return deletedNode;
+    // }
+
+    // let currentNode = this.head;
+
+    // if (this.compare.equal(currentNode.value, value)) {
+    //   if (currentNode.next) {
+    //     this.head = currentNode.next;
+    //     currentNode = this.head;
+    //     currentNode.previous = null;
+    //   } else {
+    //     this.head = null;
+    //     this.tail = null;
+    //   }
+    // }
+
+    // while (currentNode) {
+    //   if (this.compare.equal(currentNode.value, value)) {
+    //     deletedNode = currentNode;
+
+    //     const nextNode = currentNode.next;
+    //     const previousNode = currentNode.previous;
+
+    //     if (nextNode) {
+    //       nextNode.previous = previousNode;
+    //     } else {
+    //       this.tail = previousNode;
+    //     }
+
+    //     if (previousNode) {
+    //       previousNode.next = nextNode;
+    //     } else {
+    //       this.head = nextNode;
+    //     }
+    //   }
+    //   currentNode = currentNode.next;
+    // }
+
+    // return deletedNode;
+
+    //improvised
     let deletedNode = null;
 
     if (!this.head) {
@@ -97,20 +141,29 @@ export default class DoublyLinkedList {
 
     let currentNode = this.head;
 
-    if (currentNode == value) {
-      this.head = currentNode.next;
-      currentNode = this.head;
-    }
-
     while (currentNode) {
-      if (value == currentNode.toString()) {
-        const nextNode = currentNode.next;
-        const previousNode = currentNode.previous;
-
+      if (this.compare.equal(currentNode.value, value)) {
         deletedNode = currentNode;
-        if (nextNode) nextNode.previous = previousNode;
+        if (this.head == deletedNode) {
+          this.head = deletedNode.next;
 
-        if (previousNode) previousNode.next = nextNode;
+          if (this.head) {
+            this.head.previous = null;
+          }
+
+          if (this.tail == deletedNode) {
+            this.tail = null;
+          }
+        } else if (this.tail == deletedNode) {
+          this.tail = currentNode.previous;
+          this.tail.next = null;
+        } else {
+          const previousNode = currentNode.previous;
+          const nextNode = currentNode.next;
+
+          previousNode.next = nextNode;
+          nextNode.previous = previousNode;
+        }
       }
       currentNode = currentNode.next;
     }

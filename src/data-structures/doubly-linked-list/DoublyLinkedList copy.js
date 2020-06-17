@@ -1,5 +1,5 @@
-import DoublyLinkedListNode from './DoublyLinkedListNode';
-import Comparator from '../../utils/comparator/Comparator';
+import DoublyLinkedListNode from "./DoublyLinkedListNode";
+import Comparator from "../../utils/comparator/Comparator";
 
 export default class DoublyLinkedList {
   /**
@@ -218,7 +218,7 @@ export default class DoublyLinkedList {
    * @return {DoublyLinkedList}
    */
   fromArray(values) {
-    values.forEach(value => this.append(value));
+    values.forEach((value) => this.append(value));
 
     return this;
   }
@@ -228,7 +228,9 @@ export default class DoublyLinkedList {
    * @return {string}
    */
   toString(callback) {
-    return this.toArray().map(node => node.toString(callback)).toString();
+    return this.toArray()
+      .map((node) => node.toString(callback))
+      .toString();
   }
 
   /**
