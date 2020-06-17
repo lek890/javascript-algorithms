@@ -176,7 +176,7 @@ describe("DoublyLinkedList", () => {
     expect(linkedList.toString(nodeStringifier)).toBe("key2:2,key1:1");
   });
 
-  it.only("should find node by value", () => {
+  it("should find node by value", () => {
     const linkedList = new DoublyLinkedList();
 
     expect(linkedList.find({ value: 5 })).toBeNull();
@@ -201,7 +201,9 @@ describe("DoublyLinkedList", () => {
       .append({ value: 3, key: "test3" });
 
     const node = linkedList.find({
-      callback: (value) => value.key === "test2",
+      callback: (value) => {
+        return value.key === "test2";
+      },
     });
 
     expect(node).toBeDefined();

@@ -223,7 +223,7 @@ export default class DoublyLinkedList {
     return deletedNode;
   }
 
-  find(query, callback) {
+  find({ value, callback }) {
     if (!this.head) {
       return null;
     }
@@ -231,16 +231,37 @@ export default class DoublyLinkedList {
     let currentNode = this.head;
 
     while (currentNode) {
-      if (callback && callback(currentNode.value, query.value)) {
+      if (callback && callback(currentNode.value)) {
         return currentNode;
       }
-      if (this.compare.equal(currentNode.value, query.value)) {
+
+      if (this.compare.compare(currentNode.value, value) === 0) {
         return currentNode;
-        break;
       }
       currentNode = currentNode.next;
     }
 
     return null;
+  }
+
+  reverse() {
+    let currentNode = this.head;
+    let prevNode = null;
+    let nextNode = null;
+
+    while (currentNode) {
+      prevNode = currentNode.previous;
+      nextNode = currentNode.next;
+
+      currentNode.next = prevNode;
+      currentNode.previous = nextNode;
+
+      prevNode = currentNode;
+      currentNode = nextNode;
+    }
+
+    this.tail = this.head;
+    this.head = prevNode;
+    return this;
   }
 }
