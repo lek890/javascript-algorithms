@@ -43,7 +43,7 @@ describe("DoublyLinkedList", () => {
     expect(linkedList.toString()).toBe("1,1,2,3,3,3,4,5");
   });
 
-  it.only("should delete node by value from linked list", () => {
+  it("should delete node by value from linked list", () => {
     const linkedList = new DoublyLinkedList();
     expect(linkedList.delete(5)).toBeNull();
 
@@ -176,7 +176,7 @@ describe("DoublyLinkedList", () => {
     expect(linkedList.toString(nodeStringifier)).toBe("key2:2,key1:1");
   });
 
-  it("should find node by value", () => {
+  it.only("should find node by value", () => {
     const linkedList = new DoublyLinkedList();
 
     expect(linkedList.find({ value: 5 })).toBeNull();

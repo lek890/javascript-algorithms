@@ -170,4 +170,77 @@ export default class DoublyLinkedList {
 
     return deletedNode;
   }
+
+  deleteTail() {
+    // let deletedNode = null;
+    // if (this.tail) {
+    //   deletedNode = this.tail;
+    //   if (this.tail.previous) {
+    //     this.tail = this.tail.previous;
+    //     this.tail.next = null;
+    //   } else {
+    //     this.tail = null;
+    //     this.head = null;
+    //   }
+    // }
+    // return deletedNode;
+
+    // improvised
+
+    if (!this.tail) {
+      return null;
+    }
+
+    if (this.head == this.tail) {
+      const deleteTail = this.tail;
+      this.head = null;
+      this.tail = null;
+      return deleteTail;
+    }
+
+    const deletedTail = this.tail;
+    this.tail = this.tail.previous;
+    this.tail.next = null;
+
+    return deletedTail;
+  }
+
+  deleteHead() {
+    if (!this.head) {
+      return null;
+    }
+
+    if (this.head == this.tail) {
+      const deletedNode = this.tail;
+      this.head = null;
+      this.tail = null;
+      return deletedNode;
+    }
+
+    const deletedNode = this.head;
+    this.head = this.head.next;
+    this.head.previous = null;
+    return deletedNode;
+  }
+
+  find(query, callback) {
+    if (!this.head) {
+      return null;
+    }
+
+    let currentNode = this.head;
+
+    while (currentNode) {
+      if (callback && callback(currentNode.value, query.value)) {
+        return currentNode;
+      }
+      if (this.compare.equal(currentNode.value, query.value)) {
+        return currentNode;
+        break;
+      }
+      currentNode = currentNode.next;
+    }
+
+    return null;
+  }
 }
